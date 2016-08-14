@@ -31,7 +31,7 @@ public class ChartPointsViewsLayer<T: ChartPoint, U: UIView>: ChartPointsLayer<T
     override func display(chart chart: Chart) {
         super.display(chart: chart)
         
-        self.viewsWithChartPoints = self.generateChartPointViews(chartPointModels: self.chartPointsModels, chart: chart)
+        self.viewsWithChartPoints = self.generateChartPointViews(self.chartPointsModels, chart: chart)
         
         if self.delayBetweenItems == 0 {
             for v in self.viewsWithChartPoints {chart.addSubview(v.view)}
@@ -50,7 +50,7 @@ public class ChartPointsViewsLayer<T: ChartPoint, U: UIView>: ChartPointsLayer<T
         }
     }
     
-    private func generateChartPointViews(chartPointModels chartPointModels: [ChartPointLayerModel<T>], chart: Chart) -> [ViewWithChartPoint] {
+    private func generateChartPointViews(chartPointModels: [ChartPointLayerModel<T>], chart: Chart) -> [ViewWithChartPoint] {
         let viewsWithChartPoints: [ViewWithChartPoint] = self.chartPointsModels.flatMap { model in
             if let view = self.viewGenerator(chartPointModel: model, layer: self, chart: chart) {
                 return (view: view, chartPointModel: model)
